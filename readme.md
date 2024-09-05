@@ -6,6 +6,8 @@ This repository holds a sample project showing how to create a dynamic rainbow t
 
 ![screenshot of infinite runner](./misc/screenshot.png)
 
+**[Check out active gameplay here](./misc/gameplay.mp4)**
+
 This demo utilizes a technique with `Line2D` nodes to draw points at the `top_level` so that each point exists in the top-level space. This allows points to trail off from their parent element.
 
 This **GDScript** is the most important part of this project.
