@@ -1,0 +1,147 @@
+[gd_scene load_steps=14 format=3 uid="uid://dbapx03dedcmu"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_ah614"]
+[ext_resource type="Texture2D" uid="uid://corqguapkddo6" path="res://images/rider.png" id="1_gvj0f"]
+[ext_resource type="Texture2D" uid="uid://2hy7llglqq3d" path="res://images/bg.png" id="1_olvu5"]
+[ext_resource type="Texture2D" uid="uid://5q113xirqg0o" path="res://images/mountain_second.png" id="1_osfnj"]
+[ext_resource type="Texture2D" uid="uid://b1ew5uuvhrlsn" path="res://images/moutain_first.png" id="1_wylww"]
+[ext_resource type="Texture2D" uid="uid://chvgjbu6mekf1" path="res://images/foreground.png" id="4_t0xcc"]
+[ext_resource type="Texture2D" uid="uid://chd1ll0snvqul" path="res://images/stars.png" id="6_4o06u"]
+[ext_resource type="Script" path="res://scripts/lines.gd" id="6_kxtoy"]
+[ext_resource type="AudioStream" uid="uid://he14crxwxh71" path="res://sounds/jump.mp3" id="9_p3e3x"]
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_jrqkk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfmpw"]
+size = Vector2(38, 38)
+
+[sub_resource type="Gradient" id="Gradient_vi8n4"]
+offsets = PackedFloat32Array(0.00666667, 1)
+colors = PackedColorArray(0.910661, 0.752521, 7.70092e-07, 1, 0.982158, 0.410523, 0.789622, 0.673)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xmo8k"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Background" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0, 0)
+repeat_size = Vector2(480, 250)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+position = Vector2(91, 75)
+scale = Vector2(0.21, 0.21)
+texture = ExtResource("1_olvu5")
+
+[node name="Bigger Mountains" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 0.9)
+repeat_size = Vector2(422, 0)
+repeat_times = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="Bigger Mountains"]
+position = Vector2(158, 100)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("1_osfnj")
+
+[node name="Mountain" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.8, 1)
+repeat_size = Vector2(472, 0)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Mountain"]
+position = Vector2(111, 87)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_wylww")
+
+[node name="Foreground" type="Parallax2D" parent="."]
+repeat_size = Vector2(480, 0)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground"]
+position = Vector2(107, 60)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_t0xcc")
+
+[node name="TextureRect" type="TextureRect" parent="Foreground"]
+self_modulate = Color(0.0509804, 0.0117647, 0.192157, 1)
+offset_left = -103.0
+offset_top = 183.0
+offset_right = -63.0
+offset_bottom = 223.0
+scale = Vector2(12.56, 3.84)
+texture = SubResource("Texture2DRD_jrqkk")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(0, 147)
+script = ExtResource("1_ah614")
+metadata/_edit_group_ = true
+
+[node name="Collision" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_lfmpw")
+
+[node name="Lines" type="Node2D" parent="Player"]
+clip_children = 1
+script = ExtResource("6_kxtoy")
+
+[node name="Pink" type="Line2D" parent="Player/Lines"]
+position = Vector2(-9.53674e-07, 13)
+points = PackedVector2Array(0, 0, -164, 0)
+width = 7.0
+default_color = Color(1.387, 0.117, 0.579, 1)
+
+[node name="Blue" type="Line2D" parent="Player/Lines"]
+position = Vector2(-9.53674e-07, 6)
+points = PackedVector2Array(0, 0, -164, 0)
+width = 7.0
+default_color = Color(0.187, 0.39, 0.99, 1)
+
+[node name="Orange" type="Line2D" parent="Player/Lines"]
+position = Vector2(-1.90735e-06, -1)
+points = PackedVector2Array(0, 0, -164, 0)
+width = 7.0
+default_color = Color(0.992925, 0.461824, 1.15514e-06, 1)
+
+[node name="Yellow" type="Line2D" parent="Player/Lines"]
+position = Vector2(-5.68434e-14, -8)
+points = PackedVector2Array(0, 0, -164, 0)
+width = 7.0
+default_color = Color(1, 0.678431, 0, 1)
+
+[node name="Logo" type="Sprite2D" parent="Player"]
+z_index = 1
+scale = Vector2(0.0742188, 0.0742188)
+texture = ExtResource("1_gvj0f")
+
+[node name="Sparks" type="CPUParticles2D" parent="Player"]
+z_index = 1
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 0.34
+randomness = 0.34
+lifetime_randomness = 0.4
+texture = ExtResource("6_4o06u")
+emission_shape = 1
+emission_sphere_radius = 22.98
+direction = Vector2(-1, 1)
+spread = 94.09
+gravity = Vector2(0, 0)
+initial_velocity_max = 200.0
+radial_accel_max = 29.29
+angle_max = 225.5
+scale_amount_min = 0.0
+scale_amount_max = 0.1
+color = Color(0.899908, 0.903252, 0.413633, 1)
+color_ramp = SubResource("Gradient_vi8n4")
+
+[node name="Camera" type="Camera2D" parent="Player"]
+position = Vector2(57, -57)
+zoom = Vector2(3, 3)
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("9_p3e3x")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 167)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape2D_xmo8k")
