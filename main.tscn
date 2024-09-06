@@ -25,9 +25,10 @@ colors = PackedColorArray(0.910661, 0.752521, 7.70092e-07, 1, 0.982158, 0.410523
 
 [node name="Background" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0, 0)
-repeat_size = Vector2(570, 330)
+repeat_size = Vector2(530, 240)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background"]
+position = Vector2(50, 93)
 scale = Vector2(0.22, 0.22)
 texture = ExtResource("1_olvu5")
 
